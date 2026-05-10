@@ -1,6 +1,8 @@
 import React from "react";
 import { ThemeProvider } from "./components/theme-provider";
 
+import Header from "./components/Header";
+
 function App() {
   return (
     <ThemeProvider
@@ -9,7 +11,9 @@ function App() {
       enableSystem
       disableTransitionOnChange
     >
-      <div>App</div>
+      <div>
+        <Header />
+      </div>
     </ThemeProvider>
   );
 }
