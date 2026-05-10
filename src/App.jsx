@@ -73,6 +73,20 @@ function App() {
 
   const handleBlur = saveEdit;
 
+  const handlePinNotes = (id) => {
+    const updatedNotes = notes.map((note) => {
+      return id === note.id ? { ...note, pinned: !note.pinned } : note;
+    });
+    const sortedNotes = [...updatedNotes].sort((a, b) => {
+      if (a.pinned !== b.pinned) {
+        return b.pinned - a.pinned;
+      }
+
+      return a.createdAt - b.createdAt;
+    });
+    setNotes(sortedNotes);
+  };
+
   const filteredNotes = notes.filter((note) => {
     if (!debouncedSearch.trim()) return true;
     return note.note.toLowerCase().includes(debouncedSearch.toLowerCase());
@@ -102,6 +116,7 @@ function App() {
             setEditText={setEditText}
             handleKeyDown={handleKeyDown}
             handleBlur={handleBlur}
+            handlePinNotes={handlePinNotes}
           />
         </div>
       </div>

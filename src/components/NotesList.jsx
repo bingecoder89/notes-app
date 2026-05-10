@@ -10,6 +10,7 @@ function NotesList({
   setEditText,
   handleKeyDown,
   handleBlur,
+  handlePinNotes,
 }) {
   return (
     <div>
@@ -25,6 +26,7 @@ function NotesList({
               setEditText={setEditText}
               handleKeyDown={handleKeyDown}
               handleBlur={handleBlur}
+              handlePinNotes={handlePinNotes}
             />
           ))}
         </ul>
