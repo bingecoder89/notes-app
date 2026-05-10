@@ -11,6 +11,8 @@ function App() {
     JSON.parse(localStorage.getItem("notes")) || [],
   );
   const [note, setNote] = useState("");
+  const [searchText, setSearchtext] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -18,6 +20,18 @@ function App() {
 
   const captureNote = (e) => {
     setNote(e.target.value);
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchText);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [searchText]);
+
+  const handleSearch = (e) => {
+    setSearchtext(e.target.value);
   };
 
   const createNote = () => {
@@ -33,6 +47,11 @@ function App() {
     setNote("");
   };
 
+  const filteredNotes = notes.filter((note) => {
+    if (!debouncedSearch.trim()) return true;
+    return note.note.toLowerCase().includes(debouncedSearch.toLowerCase());
+  });
+
   return (
     <ThemeProvider
       attribute="class"
@@ -41,14 +60,14 @@ function App() {
       disableTransitionOnChange
     >
       <div className="bg-background text-foreground">
-        <Header />
+        <Header searchText={searchText} handleSearch={handleSearch} />
         <div className="flex flex-col items-center">
           <MakeNote
             note={note}
             captureNote={captureNote}
             createNote={createNote}
           />
-          <NotesList notes={notes} />
+          <NotesList filteredNotes={filteredNotes} />
         </div>
       </div>
     </ThemeProvider>

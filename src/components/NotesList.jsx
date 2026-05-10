@@ -1,12 +1,12 @@
 import React from "react";
 import NoteCard from "./NoteCard";
 
-function NotesList({ notes }) {
+function NotesList({ filteredNotes }) {
   return (
     <div>
-      {notes.length ? (
+      {filteredNotes.length ? (
         <ul>
-          {notes.map((note) => (
+          {filteredNotes.map((note) => (
             <NoteCard note={note} />
           ))}
         </ul>

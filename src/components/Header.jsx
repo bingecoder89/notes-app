@@ -1,7 +1,7 @@
 import { ThemeToggle } from "./ThemeToggle";
 import { RiEvernoteLine } from "@remixicon/react";
 import SearchNote from "./SearchNote";
-function Header() {
+function Header({ searchText, handleSearch }) {
   return (
     <div className="h-16 flex items-center justify-between px-4 font-mono shadow-md">
       <div className="flex items-center gap-1.5">
@@ -12,7 +12,7 @@ function Header() {
         </div>
       </div>
       <div className="flex items-center gap-1.5">
-        <SearchNote />
+        <SearchNote searchText={searchText} handleSearch={handleSearch} />
         <ThemeToggle />
       </div>
     </div>
