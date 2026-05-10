@@ -13,6 +13,8 @@ function App() {
   const [note, setNote] = useState("");
   const [searchText, setSearchtext] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [editId, setEditId] = useState("");
+  const [editText, setEditText] = useState("");
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -52,6 +54,25 @@ function App() {
     setNotes(updatedNotes);
   };
 
+  const editNote = (id, text) => {
+    setEditId(id);
+    setEditText(text);
+  };
+
+  const saveEdit = () => {
+    const updatedNotes = notes.map((note) => {
+      return editId === note.id ? { ...note, note: editText } : note;
+    });
+    setEditId(null);
+    setNotes(updatedNotes);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") saveEdit();
+  };
+
+  const handleBlur = saveEdit;
+
   const filteredNotes = notes.filter((note) => {
     if (!debouncedSearch.trim()) return true;
     return note.note.toLowerCase().includes(debouncedSearch.toLowerCase());
@@ -72,7 +93,16 @@ function App() {
             captureNote={captureNote}
             createNote={createNote}
           />
-          <NotesList filteredNotes={filteredNotes} deleteNote={deleteNote} />
+          <NotesList
+            filteredNotes={filteredNotes}
+            deleteNote={deleteNote}
+            editNote={editNote}
+            editId={editId}
+            editText={editText}
+            setEditText={setEditText}
+            handleKeyDown={handleKeyDown}
+            handleBlur={handleBlur}
+          />
         </div>
       </div>
     </ThemeProvider>
