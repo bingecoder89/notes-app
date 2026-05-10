@@ -18,10 +18,6 @@ function App() {
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 
-  const captureNote = (e) => {
-    setNote(e.target.value);
-  };
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setDebouncedSearch(searchText);
@@ -29,6 +25,10 @@ function App() {
 
     return () => clearTimeout(timer);
   }, [searchText]);
+
+  const captureNote = (e) => {
+    setNote(e.target.value);
+  };
 
   const handleSearch = (e) => {
     setSearchtext(e.target.value);
@@ -45,6 +45,11 @@ function App() {
 
     setNotes([...notes, newNote]);
     setNote("");
+  };
+
+  const deleteNote = (id) => {
+    const updatedNotes = notes.filter((note) => note.id !== id);
+    setNotes(updatedNotes);
   };
 
   const filteredNotes = notes.filter((note) => {
@@ -67,7 +72,7 @@ function App() {
             captureNote={captureNote}
             createNote={createNote}
           />
-          <NotesList filteredNotes={filteredNotes} />
+          <NotesList filteredNotes={filteredNotes} deleteNote={deleteNote} />
         </div>
       </div>
     </ThemeProvider>
