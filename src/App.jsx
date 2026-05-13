@@ -99,7 +99,7 @@ function App() {
       enableSystem
       disableTransitionOnChange
     >
-      <div className="bg-background text-foreground">
+      <div>
         <Header searchText={searchText} handleSearch={handleSearch} />
         <div className="flex flex-col items-center">
           <MakeNote

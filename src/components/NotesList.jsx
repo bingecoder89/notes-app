@@ -18,6 +18,7 @@ function NotesList({
         <ul>
           {filteredNotes.map((note) => (
             <NoteCard
+              key={note.id}
               note={note}
               deleteNote={deleteNote}
               editNote={editNote}

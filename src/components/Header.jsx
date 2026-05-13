@@ -3,15 +3,17 @@ import { RiEvernoteLine } from "@remixicon/react";
 import SearchNote from "./SearchNote";
 function Header({ searchText, handleSearch }) {
   return (
-    <div className="h-16 flex items-center justify-between px-4 font-mono shadow-md">
-      <div className="flex items-center gap-1.5">
-        <RiEvernoteLine size={30} />
+    <div className="flex items-center justify-between p-2 shadow-md shadow-muted">
+      <div className="flex items-center gap-2">
+        <RiEvernoteLine className="size-7 max-sm:size-6" />
         <div>
-          <p className="text-xl font-extrabold">EveryNote</p>
-          <p className="text-sm text-muted-foreground">take your notes.</p>
+          <p className="text-xl font-medium">EveryNote</p>
+          <p className="text-sm text-muted-foreground max-sm:hidden">
+            take your notes.
+          </p>
         </div>
       </div>
-      <div className="flex items-center gap-1.5">
+      <div className="flex items-center gap-2">
         <SearchNote searchText={searchText} handleSearch={handleSearch} />
         <ThemeToggle />
       </div>
