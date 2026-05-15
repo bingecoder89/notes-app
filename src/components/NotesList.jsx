@@ -1,17 +1,7 @@
 import React from "react";
 import NoteCard from "./NoteCard";
 
-function NotesList({
-  filteredNotes,
-  deleteNote,
-  editNote,
-  editId,
-  editText,
-  setEditText,
-  handleKeyDown,
-  handleBlur,
-  handlePinNotes,
-}) {
+function NotesList({ filteredNotes, deleteNote, editNote, handlePinNotes }) {
   return (
     <div>
       {filteredNotes.length ? (
@@ -22,11 +12,6 @@ function NotesList({
               note={note}
               deleteNote={deleteNote}
               editNote={editNote}
-              editId={editId}
-              editText={editText}
-              setEditText={setEditText}
-              handleKeyDown={handleKeyDown}
-              handleBlur={handleBlur}
               handlePinNotes={handlePinNotes}
             />
           ))}

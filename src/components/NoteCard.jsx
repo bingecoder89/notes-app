@@ -4,6 +4,9 @@ import { RiEdit2Line } from "@remixicon/react";
 import { RiStarLine } from "@remixicon/react";
 import { RiStarFill } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
+import Markdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+
 import {
   Card,
   CardContent,
@@ -13,17 +16,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export function NoteCard({
-  note,
-  deleteNote,
-  editNote,
-  editId,
-  editText,
-  setEditText,
-  handleKeyDown,
-  handleBlur,
-  handlePinNotes,
-}) {
+export function NoteCard({ note, deleteNote, editNote, handlePinNotes }) {
   const formatDate = (timestamp) => {
     const date = new Date(Number(timestamp));
 
@@ -50,18 +43,7 @@ export function NoteCard({
         </CardDescription>
       </CardHeader>
       <CardContent>
-        {editId === note.id ? (
-          <input
-            type="text"
-            value={editText}
-            onChange={(e) => setEditText(e.target.value)}
-            onKeyDown={handleKeyDown}
-            onBlur={handleBlur}
-            autoFocus
-          />
-        ) : (
-          <p>{note.note}</p>
-        )}
+        <Markdown rehypePlugins={[rehypeRaw]}>{note.note}</Markdown>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button onClick={() => handlePinNotes(note.id)} className="w-20">

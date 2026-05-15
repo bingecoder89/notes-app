@@ -5,6 +5,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import Header from "./components/Header";
 import MakeNote from "./components/MakeNote";
 import NotesList from "./components/NotesList";
+import Modal from "./components/Modal"; //changed
 
 function App() {
   const [notes, setNotes] = useState(
@@ -15,6 +16,7 @@ function App() {
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [editId, setEditId] = useState("");
   const [editText, setEditText] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false); //changed
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -55,6 +57,7 @@ function App() {
   };
 
   const editNote = (id, text) => {
+    setIsModalOpen(true); //changed
     setEditId(id);
     setEditText(text);
   };
@@ -65,6 +68,7 @@ function App() {
     });
     setEditId(null);
     setNotes(updatedNotes);
+    setIsModalOpen(false); //changed
   };
 
   const handleKeyDown = (e) => {
@@ -111,14 +115,19 @@ function App() {
             filteredNotes={filteredNotes}
             deleteNote={deleteNote}
             editNote={editNote}
-            editId={editId}
-            editText={editText}
-            setEditText={setEditText}
-            handleKeyDown={handleKeyDown}
-            handleBlur={handleBlur}
             handlePinNotes={handlePinNotes}
           />
         </div>
+        {isModalOpen && (
+          <Modal
+            editText={editText}
+            setEditText={setEditText}
+            setIsModalOpen={setIsModalOpen}
+            saveEdit={saveEdit}
+            handleKeyDown={handleKeyDown}
+          />
+        )}
+        {/* changed */}
       </div>
     </ThemeProvider>
   );
