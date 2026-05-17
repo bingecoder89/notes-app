@@ -43,7 +43,12 @@ export function NoteCard({ note, deleteNote, editNote, handlePinNotes }) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <Markdown rehypePlugins={[rehypeRaw]}>{note.note}</Markdown>
+        <div
+          className="line-clamp-3 cursor-pointer"
+          onClick={() => editNote(note.id, note.note)}
+        >
+          <Markdown rehypePlugins={[rehypeRaw]}>{note.note}</Markdown>
+        </div>
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button onClick={() => handlePinNotes(note.id)} className="w-20">

@@ -9,7 +9,7 @@ function MakeNote({ note, captureNote, createNote }) {
         placeholder="Enter your note."
         value={note}
         onChange={captureNote}
-        className="h-40 w-100 border-3 border-muted resize-none focus:outline-none focus:ring-0 max-sm:w-70"
+        className="h-40 w-100 resize-none max-sm:w-70"
       />
       <Button onClick={createNote} className="w-100 max-sm:w-70 mt-2">
         Create Note
