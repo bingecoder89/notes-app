@@ -16,7 +16,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-export function NoteCard({ note, deleteNote, editNote, handlePinNotes }) {
+export function NoteCard({
+  note,
+  searchText,
+  deleteNote,
+  editNote,
+  handlePinNotes,
+}) {
   const formatDate = (timestamp) => {
     const date = new Date(Number(timestamp));
 
@@ -34,6 +40,16 @@ export function NoteCard({ note, deleteNote, editNote, handlePinNotes }) {
 
     return `${time} ${day}`;
   };
+
+  const noteText = note.note;
+  const position = noteText.toLowerCase().indexOf(searchText.toLowerCase());
+  const beforeMatch = noteText.slice(0, position);
+  const match = noteText.slice(position, position + searchText.length);
+  const afterMatch = noteText.slice(position + searchText.length);
+
+  const highlightedText =
+    beforeMatch + `<span className="bg-amber-200">${match}</span>` + afterMatch;
+
   return (
     <Card className="w-100 mt-2.5">
       <CardHeader>
@@ -47,7 +63,11 @@ export function NoteCard({ note, deleteNote, editNote, handlePinNotes }) {
           className="line-clamp-3 cursor-pointer"
           onClick={() => editNote(note.id, note.note)}
         >
-          <Markdown rehypePlugins={[rehypeRaw]}>{note.note}</Markdown>
+          {position !== -1 && searchText ? (
+            <Markdown rehypePlugins={[rehypeRaw]}>{highlightedText}</Markdown>
+          ) : (
+            <Markdown rehypePlugins={[rehypeRaw]}>{noteText}</Markdown>
+          )}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
