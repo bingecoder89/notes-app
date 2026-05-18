@@ -16,6 +16,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { Badge } from "@/components/ui/badge";
+
 export function NoteCard({
   note,
   searchText,
@@ -57,6 +59,13 @@ export function NoteCard({
         <CardDescription className="text-xs">
           created at: {formatDate(note.createdAt)}
         </CardDescription>
+        {!note.tags.trim() ? null : (
+          <div className="flex flex-wrap items-center gap-1">
+            {note.tags.split(",").map((tag) => (
+              <Badge>{tag.trim()}</Badge>
+            ))}
+          </div>
+        )}
       </CardHeader>
       <CardContent>
         <div

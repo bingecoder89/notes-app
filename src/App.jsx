@@ -17,6 +17,7 @@ function App() {
   const [editId, setEditId] = useState("");
   const [editText, setEditText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [tagsInput, setTagsInput] = useState("");
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -30,10 +31,6 @@ function App() {
     return () => clearTimeout(timer);
   }, [searchText]);
 
-  const captureNote = (e) => {
-    setNote(e.target.value);
-  };
-
   const handleSearch = (e) => {
     setSearchtext(e.target.value);
   };
@@ -43,12 +40,14 @@ function App() {
     const newNote = {
       id: uuidv4(),
       note: note,
+      tags: tagsInput,
       pinned: false,
       createdAt: Date.now(),
     };
 
     setNotes([...notes, newNote]);
     setNote("");
+    setTagsInput("");
   };
 
   const deleteNote = (id) => {
@@ -108,7 +107,9 @@ function App() {
         <div className="flex flex-col items-center">
           <MakeNote
             note={note}
-            captureNote={captureNote}
+            setNote={setNote}
+            tagsInput={tagsInput}
+            setTagsInput={setTagsInput}
             createNote={createNote}
           />
           <NotesList
