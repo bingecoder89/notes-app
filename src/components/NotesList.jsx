@@ -7,6 +7,7 @@ function NotesList({
   deleteNote,
   editNote,
   handlePinNotes,
+  filterTag,
 }) {
   return (
     <div>
@@ -20,6 +21,7 @@ function NotesList({
               deleteNote={deleteNote}
               editNote={editNote}
               handlePinNotes={handlePinNotes}
+              filterTag={filterTag}
             />
           ))}
         </ul>

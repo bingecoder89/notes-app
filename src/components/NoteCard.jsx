@@ -24,6 +24,7 @@ export function NoteCard({
   deleteNote,
   editNote,
   handlePinNotes,
+  filterTag,
 }) {
   const formatDate = (timestamp) => {
     const date = new Date(Number(timestamp));
@@ -61,8 +62,14 @@ export function NoteCard({
         </CardDescription>
         {!note.tags.trim() ? null : (
           <div className="flex flex-wrap items-center gap-1">
-            {note.tags.split(",").map((tag) => (
-              <Badge>{tag.trim()}</Badge>
+            {note.tags.split(",").map((tag, index) => (
+              <Badge
+                key={index}
+                className="cursor-pointer"
+                onClick={() => filterTag(tag)}
+              >
+                {tag.trim()}
+              </Badge>
             ))}
           </div>
         )}

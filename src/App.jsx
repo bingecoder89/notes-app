@@ -18,6 +18,8 @@ function App() {
   const [editText, setEditText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tagsInput, setTagsInput] = useState("");
+  const [selectedTag, setSelectedTag] = useState("");
+  const [showFiltered, setShowFiltered] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -90,10 +92,22 @@ function App() {
     setNotes(sortedNotes);
   };
 
-  const filteredNotes = notes.filter((note) => {
+  const filterTag = (tag) => {
+    setShowFiltered(!showFiltered);
+    setSelectedTag(tag);
+  };
+
+  let filteredNotes = notes.filter((note) => {
     if (!debouncedSearch.trim()) return true;
     return note.note.toLowerCase().includes(debouncedSearch.toLowerCase());
   });
+
+  {
+    showFiltered &&
+      (filteredNotes = filteredNotes.filter((note) => {
+        if (note.tags.includes(selectedTag)) return true;
+      }));
+  }
 
   return (
     <ThemeProvider
@@ -118,6 +132,7 @@ function App() {
             deleteNote={deleteNote}
             editNote={editNote}
             handlePinNotes={handlePinNotes}
+            filterTag={filterTag}
           />
         </div>
         {isModalOpen && (
