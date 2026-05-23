@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import MakeNote from "./components/MakeNote";
 import NotesList from "./components/NotesList";
 import Modal from "./components/Modal";
+import FilterChip from "./components/FilterChip";
 
 function App() {
   const [notes, setNotes] = useState(
@@ -18,8 +19,7 @@ function App() {
   const [editText, setEditText] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tagsInput, setTagsInput] = useState("");
-  const [selectedTag, setSelectedTag] = useState("");
-  const [showFiltered, setShowFiltered] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
@@ -93,8 +93,13 @@ function App() {
   };
 
   const filterTag = (tag) => {
-    setShowFiltered(!showFiltered);
-    setSelectedTag(tag);
+    if (selectedTags.includes(tag)) return;
+    setSelectedTags([...selectedTags, tag]);
+  };
+
+  const deleteTag = (index) => {
+    const updatedTags = selectedTags.filter((tag, idx) => index !== idx);
+    setSelectedTags(updatedTags);
   };
 
   let filteredNotes = notes.filter((note) => {
@@ -102,12 +107,10 @@ function App() {
     return note.note.toLowerCase().includes(debouncedSearch.toLowerCase());
   });
 
-  {
-    showFiltered &&
-      (filteredNotes = filteredNotes.filter((note) => {
-        if (note.tags.includes(selectedTag)) return true;
-      }));
-  }
+  selectedTags.length > 0 &&
+    (filteredNotes = filteredNotes.filter((note) => {
+      return selectedTags.some((tag) => note.tags.includes(tag));
+    }));
 
   return (
     <ThemeProvider
@@ -126,6 +129,7 @@ function App() {
             setTagsInput={setTagsInput}
             createNote={createNote}
           />
+          <FilterChip selectedTags={selectedTags} deleteTag={deleteTag} />
           <NotesList
             filteredNotes={filteredNotes}
             searchText={searchText}
