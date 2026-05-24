@@ -129,7 +129,13 @@ function App() {
             setTagsInput={setTagsInput}
             createNote={createNote}
           />
-          <FilterChip selectedTags={selectedTags} deleteTag={deleteTag} />
+          {selectedTags.length > 0 && (
+            <FilterChip
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+              deleteTag={deleteTag}
+            />
+          )}
           <NotesList
             filteredNotes={filteredNotes}
             searchText={searchText}
