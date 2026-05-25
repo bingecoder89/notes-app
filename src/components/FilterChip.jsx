@@ -8,14 +8,20 @@ function FilterChip({ selectedTags, setSelectedTags, deleteTag }) {
     <div className="flex items-center gap-1.5 m-2.5">
       {selectedTags.map((tag, index) => {
         return (
-          <Badge onClick={() => deleteTag(index)} key={index}>
+          <Badge
+            className="cursor-pointer"
+            onClick={() => deleteTag(index)}
+            key={index}
+          >
             <RiCloseLine />
             {tag}
           </Badge>
         );
       })}
       {selectedTags.length > 0 && (
-        <Badge onClick={() => setSelectedTags([])}>Clear All</Badge>
+        <Badge className="cursor-pointer" onClick={() => setSelectedTags([])}>
+          Clear All
+        </Badge>
       )}
     </div>
   );
