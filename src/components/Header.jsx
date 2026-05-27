@@ -1,4 +1,5 @@
 import { ThemeToggle } from "./ThemeToggle";
+import { Link } from "react-router";
 import { RiEvernoteLine } from "@remixicon/react";
 import { RiArchive2Line } from "@remixicon/react";
 import { Button } from "./ui/button";
@@ -7,7 +8,9 @@ function Header({ searchText, handleSearch }) {
   return (
     <div className="flex items-center justify-between p-2 shadow-md shadow-muted">
       <div className="flex items-center gap-2">
-        <RiEvernoteLine className="size-7 max-sm:size-6" />
+        <Link to="/">
+          <RiEvernoteLine className="size-7 max-sm:size-6" />
+        </Link>
         <div>
           <p className="text-xl font-medium">EveryNote</p>
           <p className="text-sm text-muted-foreground max-sm:hidden">
@@ -16,9 +19,11 @@ function Header({ searchText, handleSearch }) {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="outline">
-          <RiArchive2Line />
-        </Button>
+        <Link to="/archive">
+          <Button variant="outline">
+            <RiArchive2Line />
+          </Button>
+        </Link>
         <SearchNote searchText={searchText} handleSearch={handleSearch} />
         <ThemeToggle />
       </div>
