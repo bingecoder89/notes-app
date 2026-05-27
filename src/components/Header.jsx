@@ -1,5 +1,7 @@
 import { ThemeToggle } from "./ThemeToggle";
 import { RiEvernoteLine } from "@remixicon/react";
+import { RiArchive2Line } from "@remixicon/react";
+import { Button } from "./ui/button";
 import SearchNote from "./SearchNote";
 function Header({ searchText, handleSearch }) {
   return (
@@ -14,6 +16,9 @@ function Header({ searchText, handleSearch }) {
         </div>
       </div>
       <div className="flex items-center gap-2">
+        <Button variant="outline">
+          <RiArchive2Line />
+        </Button>
         <SearchNote searchText={searchText} handleSearch={handleSearch} />
         <ThemeToggle />
       </div>
