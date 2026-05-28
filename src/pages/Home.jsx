@@ -11,7 +11,7 @@ function Home({ searchText }) {
   const [notes, setNotes] = useState(
     JSON.parse(localStorage.getItem("notes")) || [],
   );
-  const [note, setNote] = useState("");
+  const [noteText, setNoteText] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
   const [editId, setEditId] = useState("");
   const [editText, setEditText] = useState("");
@@ -36,10 +36,10 @@ function Home({ searchText }) {
   };
 
   const createNote = () => {
-    if (!note.trim()) return;
+    if (!noteText.trim()) return;
     const newNote = {
       id: uuidv4(),
-      note: note,
+      note: noteText,
       tags: tagsInput,
       pinned: false,
       createdAt: Date.now(),
@@ -114,8 +114,8 @@ function Home({ searchText }) {
     <>
       <div className="flex flex-col items-center">
         <MakeNote
-          note={note}
-          setNote={setNote}
+          noteText={noteText}
+          setNoteText={setNoteText}
           tagsInput={tagsInput}
           setTagsInput={setTagsInput}
           createNote={createNote}

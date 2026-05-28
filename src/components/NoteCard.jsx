@@ -1,8 +1,9 @@
 import React from "react";
-import { RiDeleteBinLine } from "@remixicon/react";
+import { RiArchiveLine, RiDeleteBinLine } from "@remixicon/react";
 import { RiEdit2Line } from "@remixicon/react";
 import { RiStarLine } from "@remixicon/react";
 import { RiStarFill } from "@remixicon/react";
+import { RiInboxArchiveLine } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
@@ -87,13 +88,16 @@ export function NoteCard({
         </div>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button onClick={() => handlePinNotes(note.id)} className="w-20">
+        <Button onClick={() => handlePinNotes(note.id)} className="w-15">
           {note.pinned ? <RiStarFill /> : <RiStarLine />}
         </Button>
-        <Button onClick={() => editNote(note.id, note.note)} className="w-20">
+        <Button onClick={() => editNote(note.id, note.note)} className="w-15">
           <RiEdit2Line />
         </Button>
-        <Button onClick={() => deleteNote(note.id)} className="w-20">
+        <Button className="w-15">
+          <RiInboxArchiveLine />
+        </Button>
+        <Button onClick={() => deleteNote(note.id)} className="w-15">
           <RiDeleteBinLine />
         </Button>
       </CardFooter>

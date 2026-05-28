@@ -3,13 +3,19 @@ import { Button } from "./ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 
-function MakeNote({ note, setNote, tagsInput, setTagsInput, createNote }) {
+function MakeNote({
+  noteText,
+  setNoteText,
+  tagsInput,
+  setTagsInput,
+  createNote,
+}) {
   return (
     <div className="flex flex-col items-center pt-8 gap-2.5">
       <Textarea
         placeholder="Enter your note."
-        value={note}
-        onChange={(e) => setNote(e.target.value)}
+        value={noteText}
+        onChange={(e) => setNoteText(e.target.value)}
         className="h-40 w-100 resize-none max-sm:w-70"
       />
       <Input
