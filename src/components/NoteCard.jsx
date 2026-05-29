@@ -26,6 +26,7 @@ export function NoteCard({
   editNote,
   handlePinNotes,
   filterTag,
+  handleArchive,
 }) {
   const formatDate = (timestamp) => {
     const date = new Date(Number(timestamp));
@@ -94,7 +95,7 @@ export function NoteCard({
         <Button onClick={() => editNote(note.id, note.note)} className="w-15">
           <RiEdit2Line />
         </Button>
-        <Button className="w-15">
+        <Button onClick={() => handleArchive(note.id, note)} className="w-15">
           <RiInboxArchiveLine />
         </Button>
         <Button onClick={() => deleteNote(note.id)} className="w-15">

@@ -2,18 +2,19 @@ import React from "react";
 import NoteCard from "./NoteCard";
 
 function NotesList({
-  filteredNotes,
+  conditionalNotes,
   searchText,
   deleteNote,
   editNote,
   handlePinNotes,
   filterTag,
+  handleArchive,
 }) {
   return (
     <div>
-      {filteredNotes.length ? (
+      {conditionalNotes.length > 0 ? (
         <ul>
-          {filteredNotes.map((note) => (
+          {conditionalNotes.map((note) => (
             <NoteCard
               key={note.id}
               note={note}
@@ -22,6 +23,7 @@ function NotesList({
               editNote={editNote}
               handlePinNotes={handlePinNotes}
               filterTag={filterTag}
+              handleArchive={handleArchive}
             />
           ))}
         </ul>
