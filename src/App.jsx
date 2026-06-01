@@ -88,14 +88,14 @@ function App() {
     const updatedNotes = notes.map((note) => {
       return id === note.id ? { ...note, pinned: !note.pinned } : note;
     });
-    const sortedNotes = [...updatedNotes].sort((a, b) => {
+    updatedNotes.sort((a, b) => {
       if (a.pinned !== b.pinned) {
         return b.pinned - a.pinned;
       }
 
-      return a.createdAt - b.createdAt;
+      return a.pinned - b.pinned;
     });
-    setNotes(sortedNotes);
+    setNotes(updatedNotes);
   };
 
   const filterTag = (tag) => {
@@ -123,6 +123,14 @@ function App() {
     (filteredNotes = filteredNotes.filter((note) => {
       return selectedTags.some((tag) => note.tags.includes(tag));
     }));
+
+  filteredNotes = filteredNotes.sort((a, b) => {
+    if (a.createdAt !== b.createdAt) {
+      return b.createdAt - a.createdAt;
+    }
+
+    return a.createdAt - b.createdAt;
+  });
   return (
     <ThemeProvider
       attribute="class"
