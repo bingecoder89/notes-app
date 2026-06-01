@@ -63,6 +63,11 @@ function App() {
     setNotes(updatedNotes);
   };
 
+  const deleteArchiveNote = (id) => {
+    const updatedArchiveNotes = archiveNotes.filter((note) => note.id !== id);
+    setArchiveNotes(updatedArchiveNotes);
+  };
+
   const editNote = (id, text) => {
     setIsModalOpen(true);
     setEditId(id);
@@ -110,8 +115,14 @@ function App() {
 
   const handleArchive = (id, note) => {
     !archiveNotes.includes(note) && setArchiveNotes([...archiveNotes, note]);
-    const updatedNotes = notes.filter((note) => note.id !== id);
-    setNotes(updatedNotes);
+    const updatedArchiveNotes = notes.filter((note) => note.id !== id);
+    setNotes(updatedArchiveNotes);
+  };
+
+  const handleUnArchive = (id, note) => {
+    setNotes([...notes, note]);
+    const updatedArchiveNotes = archiveNotes.filter((note) => note.id !== id);
+    setArchiveNotes(updatedArchiveNotes);
   };
 
   let filteredNotes = notes.filter((note) => {
@@ -170,6 +181,7 @@ function App() {
                   saveEdit={saveEdit}
                   handleKeyDown={handleKeyDown}
                   handleArchive={handleArchive}
+                  isArchive={false}
                 />
               }
             />
@@ -179,11 +191,13 @@ function App() {
                 <Archive
                   conditionalNotes={archiveNotes}
                   searchText={searchText}
-                  deleteNote={deleteNote}
-                  editNote={editNote}
-                  handlePinNotes={handlePinNotes}
+                  deleteArchiveNote={deleteArchiveNote}
+                  // editNote={editNote}
+                  // handlePinNotes={handlePinNotes}
                   filterTag={filterTag}
                   handleArchive={handleArchive}
+                  handleUnArchive={handleUnArchive}
+                  isArchive={true}
                 />
               }
             />

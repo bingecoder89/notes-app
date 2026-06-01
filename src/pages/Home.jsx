@@ -25,6 +25,7 @@ function Home({
   saveEdit,
   handleKeyDown,
   handleArchive,
+  isArchive,
 }) {
   return (
     <>
@@ -51,6 +52,7 @@ function Home({
           handlePinNotes={handlePinNotes}
           filterTag={filterTag}
           handleArchive={handleArchive}
+          isArchive={isArchive}
         />
       </div>
       {isModalOpen && (

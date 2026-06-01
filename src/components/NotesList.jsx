@@ -5,10 +5,13 @@ function NotesList({
   conditionalNotes,
   searchText,
   deleteNote,
+  deleteArchiveNote,
   editNote,
   handlePinNotes,
   filterTag,
   handleArchive,
+  handleUnArchive,
+  isArchive,
 }) {
   return (
     <div>
@@ -20,10 +23,13 @@ function NotesList({
               note={note}
               searchText={searchText}
               deleteNote={deleteNote}
+              deleteArchiveNote={deleteArchiveNote}
               editNote={editNote}
               handlePinNotes={handlePinNotes}
               filterTag={filterTag}
               handleArchive={handleArchive}
+              handleUnArchive={handleUnArchive}
+              isArchive={isArchive}
             />
           ))}
         </ul>
