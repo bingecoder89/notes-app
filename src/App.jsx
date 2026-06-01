@@ -93,13 +93,6 @@ function App() {
     const updatedNotes = notes.map((note) => {
       return id === note.id ? { ...note, pinned: !note.pinned } : note;
     });
-    updatedNotes.sort((a, b) => {
-      if (a.pinned !== b.pinned) {
-        return b.pinned - a.pinned;
-      }
-
-      return a.pinned - b.pinned;
-    });
     setNotes(updatedNotes);
   };
 
@@ -136,6 +129,14 @@ function App() {
     }));
 
   filteredNotes = filteredNotes.sort((a, b) => {
+    if (a.pinned !== b.pinned) {
+      return b.pinned - a.pinned;
+    }
+
+    return b.createdAt - a.createdAt;
+  });
+
+  let sortedArchiveNotes = [...archiveNotes].sort((a, b) => {
     if (a.createdAt !== b.createdAt) {
       return b.createdAt - a.createdAt;
     }
@@ -189,7 +190,7 @@ function App() {
               path="/archive"
               element={
                 <Archive
-                  conditionalNotes={archiveNotes}
+                  conditionalNotes={sortedArchiveNotes}
                   searchText={searchText}
                   deleteArchiveNote={deleteArchiveNote}
                   // editNote={editNote}
