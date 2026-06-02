@@ -34,7 +34,7 @@ function NotesList({
           ))}
         </ul>
       ) : (
-        <p>No Notes</p>
+        <p>{isArchive ? "No Archive Notes!" : "No Notes!"}</p>
       )}
     </div>
   );
