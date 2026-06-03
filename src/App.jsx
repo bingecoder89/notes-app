@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ThemeProvider } from "./components/theme-provider";
 import { Routes, Route } from "react-router";
+import { useContext } from "react";
+import { NotesContext } from "./context/NotesContext";
 
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Archive from "./pages/Archive";
 
 function App() {
-  const [notes, setNotes] = useState(
-    JSON.parse(localStorage.getItem("notes")) || [],
-  );
+  const { notes, setNotes, archiveNotes, setArchiveNotes } =
+    useContext(NotesContext);
   const [noteText, setNoteText] = useState("");
   const [searchText, setSearchText] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
@@ -19,9 +20,6 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tagsInput, setTagsInput] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
-  const [archiveNotes, setArchiveNotes] = useState(
-    JSON.parse(localStorage.getItem("archiveNotes")) || [],
-  );
 
   useEffect(() => {
     localStorage.setItem("notes", JSON.stringify(notes));
