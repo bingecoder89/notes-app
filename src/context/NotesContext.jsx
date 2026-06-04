@@ -27,6 +27,17 @@ function NotesProvider({ children }) {
     const updatedArchiveNotes = notes.filter((note) => note.id !== id);
     setNotes(updatedArchiveNotes);
   };
+
+  const handleUnArchive = (id, note) => {
+    setNotes([...notes, note]);
+    const updatedArchiveNotes = archiveNotes.filter((note) => note.id !== id);
+    setArchiveNotes(updatedArchiveNotes);
+  };
+
+  const deleteArchiveNote = (id) => {
+    const updatedArchiveNotes = archiveNotes.filter((note) => note.id !== id);
+    setArchiveNotes(updatedArchiveNotes);
+  };
   return (
     <NotesContext.Provider
       value={{
@@ -35,8 +46,10 @@ function NotesProvider({ children }) {
         archiveNotes,
         setArchiveNotes,
         deleteNote,
+        deleteArchiveNote,
         handlePinNotes,
         handleArchive,
+        handleUnArchive,
       }}
     >
       {children}

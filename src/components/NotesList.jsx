@@ -5,9 +5,7 @@ function NotesList({
   conditionalNotes,
   editNote,
   searchText,
-  deleteArchiveNote,
   filterTag,
-  handleUnArchive,
   isArchive,
 }) {
   return (
@@ -20,9 +18,7 @@ function NotesList({
               note={note}
               editNote={editNote}
               searchText={searchText}
-              deleteArchiveNote={deleteArchiveNote}
               filterTag={filterTag}
-              handleUnArchive={handleUnArchive}
               isArchive={isArchive}
             />
           ))}

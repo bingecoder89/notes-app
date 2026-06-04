@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { RiArchiveLine, RiDeleteBinLine } from "@remixicon/react";
+import { RiDeleteBinLine } from "@remixicon/react";
 import { RiEdit2Line } from "@remixicon/react";
 import { RiStarLine } from "@remixicon/react";
 import { RiStarFill } from "@remixicon/react";
@@ -23,17 +23,14 @@ import {
 
 import { Badge } from "@/components/ui/badge";
 
-export function NoteCard({
-  note,
-  editNote,
-  searchText,
-  deleteArchiveNote,
-  filterTag,
-  handleUnArchive,
-  isArchive,
-}) {
-  const { deleteNote, handlePinNotes, handleArchive } =
-    useContext(NotesContext);
+export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
+  const {
+    deleteNote,
+    deleteArchiveNote,
+    handlePinNotes,
+    handleArchive,
+    handleUnArchive,
+  } = useContext(NotesContext);
   const formatDate = (timestamp) => {
     const date = new Date(Number(timestamp));
 

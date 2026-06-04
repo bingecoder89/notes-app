@@ -56,11 +56,6 @@ function App() {
     setTagsInput("");
   };
 
-  const deleteArchiveNote = (id) => {
-    const updatedArchiveNotes = archiveNotes.filter((note) => note.id !== id);
-    setArchiveNotes(updatedArchiveNotes);
-  };
-
   const editNote = (id, text) => {
     setIsModalOpen(true);
     setEditId(id);
@@ -80,7 +75,7 @@ function App() {
     if (e.key === "Enter") saveEdit();
   };
 
-  const handleBlur = saveEdit;
+  // const handleBlur = saveEdit;
 
   const filterTag = (tag) => {
     if (selectedTags.includes(tag)) return;
@@ -90,12 +85,6 @@ function App() {
   const deleteTag = (index) => {
     const updatedTags = selectedTags.filter((_, idx) => index !== idx);
     setSelectedTags(updatedTags);
-  };
-
-  const handleUnArchive = (id, note) => {
-    setNotes([...notes, note]);
-    const updatedArchiveNotes = archiveNotes.filter((note) => note.id !== id);
-    setArchiveNotes(updatedArchiveNotes);
   };
 
   let filteredNotes = notes.filter((note) => {
@@ -169,9 +158,7 @@ function App() {
                 <Archive
                   conditionalNotes={sortedArchiveNotes}
                   searchText={searchText}
-                  deleteArchiveNote={deleteArchiveNote}
                   filterTag={filterTag}
-                  handleUnArchive={handleUnArchive}
                   isArchive={true}
                 />
               }
