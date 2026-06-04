@@ -3,13 +3,10 @@ import NoteCard from "./NoteCard";
 
 function NotesList({
   conditionalNotes,
-  searchText,
-  deleteNote,
-  deleteArchiveNote,
   editNote,
-  handlePinNotes,
+  searchText,
+  deleteArchiveNote,
   filterTag,
-  handleArchive,
   handleUnArchive,
   isArchive,
 }) {
@@ -21,13 +18,10 @@ function NotesList({
             <NoteCard
               key={note.id}
               note={note}
-              searchText={searchText}
-              deleteNote={deleteNote}
-              deleteArchiveNote={deleteArchiveNote}
               editNote={editNote}
-              handlePinNotes={handlePinNotes}
+              searchText={searchText}
+              deleteArchiveNote={deleteArchiveNote}
               filterTag={filterTag}
-              handleArchive={handleArchive}
               handleUnArchive={handleUnArchive}
               isArchive={isArchive}
             />

@@ -13,10 +13,8 @@ function Home({
   setSelectedTags,
   deleteTag,
   conditionalNotes,
-  searchText,
-  deleteNote,
   editNote,
-  handlePinNotes,
+  searchText,
   filterTag,
   editText,
   setEditText,
@@ -24,7 +22,6 @@ function Home({
   setIsModalOpen,
   saveEdit,
   handleKeyDown,
-  handleArchive,
   isArchive,
 }) {
   return (
@@ -46,12 +43,9 @@ function Home({
         )}
         <NotesList
           conditionalNotes={conditionalNotes}
-          searchText={searchText}
-          deleteNote={deleteNote}
           editNote={editNote}
-          handlePinNotes={handlePinNotes}
+          searchText={searchText}
           filterTag={filterTag}
-          handleArchive={handleArchive}
           isArchive={isArchive}
         />
       </div>

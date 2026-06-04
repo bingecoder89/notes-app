@@ -56,11 +56,6 @@ function App() {
     setTagsInput("");
   };
 
-  const deleteNote = (id) => {
-    const updatedNotes = notes.filter((note) => note.id !== id);
-    setNotes(updatedNotes);
-  };
-
   const deleteArchiveNote = (id) => {
     const updatedArchiveNotes = archiveNotes.filter((note) => note.id !== id);
     setArchiveNotes(updatedArchiveNotes);
@@ -87,13 +82,6 @@ function App() {
 
   const handleBlur = saveEdit;
 
-  const handlePinNotes = (id) => {
-    const updatedNotes = notes.map((note) => {
-      return id === note.id ? { ...note, pinned: !note.pinned } : note;
-    });
-    setNotes(updatedNotes);
-  };
-
   const filterTag = (tag) => {
     if (selectedTags.includes(tag)) return;
     setSelectedTags([...selectedTags, tag]);
@@ -102,12 +90,6 @@ function App() {
   const deleteTag = (index) => {
     const updatedTags = selectedTags.filter((_, idx) => index !== idx);
     setSelectedTags(updatedTags);
-  };
-
-  const handleArchive = (id, note) => {
-    !archiveNotes.includes(note) && setArchiveNotes([...archiveNotes, note]);
-    const updatedArchiveNotes = notes.filter((note) => note.id !== id);
-    setNotes(updatedArchiveNotes);
   };
 
   const handleUnArchive = (id, note) => {
@@ -168,10 +150,8 @@ function App() {
                   setSelectedTags={setSelectedTags}
                   deleteTag={deleteTag}
                   conditionalNotes={filteredNotes}
-                  searchText={searchText}
-                  deleteNote={deleteNote}
                   editNote={editNote}
-                  handlePinNotes={handlePinNotes}
+                  searchText={searchText}
                   filterTag={filterTag}
                   editText={editText}
                   setEditText={setEditText}
@@ -179,7 +159,6 @@ function App() {
                   setIsModalOpen={setIsModalOpen}
                   saveEdit={saveEdit}
                   handleKeyDown={handleKeyDown}
-                  handleArchive={handleArchive}
                   isArchive={false}
                 />
               }
@@ -191,10 +170,7 @@ function App() {
                   conditionalNotes={sortedArchiveNotes}
                   searchText={searchText}
                   deleteArchiveNote={deleteArchiveNote}
-                  // editNote={editNote}
-                  // handlePinNotes={handlePinNotes}
                   filterTag={filterTag}
-                  handleArchive={handleArchive}
                   handleUnArchive={handleUnArchive}
                   isArchive={true}
                 />

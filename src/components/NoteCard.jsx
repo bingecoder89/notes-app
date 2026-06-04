@@ -1,4 +1,5 @@
 import React from "react";
+import { useContext } from "react";
 import { RiArchiveLine, RiDeleteBinLine } from "@remixicon/react";
 import { RiEdit2Line } from "@remixicon/react";
 import { RiStarLine } from "@remixicon/react";
@@ -8,6 +9,8 @@ import { RiInboxUnarchiveLine } from "@remixicon/react";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+
+import { NotesContext } from "../context/NotesContext";
 
 import {
   Card,
@@ -22,16 +25,15 @@ import { Badge } from "@/components/ui/badge";
 
 export function NoteCard({
   note,
-  searchText,
-  deleteNote,
-  deleteArchiveNote,
   editNote,
-  handlePinNotes,
+  searchText,
+  deleteArchiveNote,
   filterTag,
-  handleArchive,
   handleUnArchive,
   isArchive,
 }) {
+  const { deleteNote, handlePinNotes, handleArchive } =
+    useContext(NotesContext);
   const formatDate = (timestamp) => {
     const date = new Date(Number(timestamp));
 
