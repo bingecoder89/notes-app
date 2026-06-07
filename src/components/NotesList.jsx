@@ -9,9 +9,9 @@ function NotesList({
   isArchive,
 }) {
   return (
-    <div>
+    <div className="mb-8">
       {conditionalNotes.length > 0 ? (
-        <ul>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {conditionalNotes.map((note) => (
             <NoteCard
               key={note.id}

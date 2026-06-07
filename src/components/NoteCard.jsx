@@ -59,7 +59,7 @@ export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
     beforeMatch + `<span className="bg-amber-200">${match}</span>` + afterMatch;
 
   return (
-    <Card className="w-100 mt-2.5">
+    <Card className="w-100 max-sm:w-96">
       <CardHeader>
         <CardTitle className="text-xs">EveryNote</CardTitle>
         <CardDescription className="text-xs">
