@@ -1,6 +1,9 @@
 import React from "react";
 import NoteCard from "./NoteCard";
 
+import { RiStickyNoteLine } from "@remixicon/react";
+import { RiArchiveStackFill } from "@remixicon/react";
+
 function NotesList({
   conditionalNotes,
   editNote,
@@ -23,8 +26,22 @@ function NotesList({
             />
           ))}
         </ul>
+      ) : isArchive ? (
+        <div className="flex flex-col gap-1">
+          <div className="flex gap-1.5 justify-center items-center">
+            <RiArchiveStackFill />
+            <p>No Archived Notes</p>
+          </div>
+          <p>Archived notes will appear here</p>
+        </div>
       ) : (
-        <p>{isArchive ? "No Archive Notes!" : "No Notes!"}</p>
+        <div className="flex flex-col gap-1">
+          <div className="flex gap-1.5 justify-center items-center">
+            <RiStickyNoteLine />
+            <p>No Notes Yet</p>
+          </div>
+          <p>Create your first note to get started.</p>
+        </div>
       )}
     </div>
   );
