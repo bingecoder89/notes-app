@@ -6,6 +6,7 @@ import { RiStarLine } from "@remixicon/react";
 import { RiStarFill } from "@remixicon/react";
 import { RiInboxArchiveLine } from "@remixicon/react";
 import { RiInboxUnarchiveLine } from "@remixicon/react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
@@ -104,13 +105,22 @@ export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
         )}
         {isArchive ? (
           <Button
-            onClick={() => handleUnArchive(note.id, note)}
+            onClick={() => {
+              handleUnArchive(note.id, note);
+              toast.success("Note Unarchived!", { position: "bottom-right" });
+            }}
             className="w-15"
           >
             <RiInboxUnarchiveLine />
           </Button>
         ) : (
-          <Button onClick={() => handleArchive(note.id, note)} className="w-15">
+          <Button
+            onClick={() => {
+              handleArchive(note.id, note);
+              toast.success("Note archived!", { position: "bottom-right" });
+            }}
+            className="w-15"
+          >
             <RiInboxArchiveLine />
           </Button>
         )}

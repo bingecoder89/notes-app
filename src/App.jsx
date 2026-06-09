@@ -8,6 +8,7 @@ import { NotesContext } from "./context/NotesContext";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Archive from "./pages/Archive";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
   const { notes, setNotes, archiveNotes, setArchiveNotes } =
@@ -120,6 +121,7 @@ function App() {
       disableTransitionOnChange
     >
       <div>
+        <Toaster />
         <Routes>
           <Route
             element={
