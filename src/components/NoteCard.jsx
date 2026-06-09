@@ -22,6 +22,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 import { Badge } from "@/components/ui/badge";
 
 export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
@@ -124,7 +136,7 @@ export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
             <RiInboxArchiveLine />
           </Button>
         )}
-        <Button
+        {/* <Button
           onClick={
             isArchive
               ? () => deleteArchiveNote(note.id)
@@ -133,7 +145,35 @@ export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
           className="w-15"
         >
           <RiDeleteBinLine />
-        </Button>
+        </Button> */}
+        {isArchive ? (
+          <Button onClick={() => deleteArchiveNote(note.id)} className="w-15">
+            <RiDeleteBinLine />
+          </Button>
+        ) : (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button className="w-15">
+                <RiDeleteBinLine />
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. This note will be permanently
+                  deleted.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={() => deleteNote(note.id)}>
+                  Delete
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
       </CardFooter>
     </Card>
   );
