@@ -1,4 +1,5 @@
 import React from "react";
+import { GoogleGenAI } from "@google/genai";
 import { useContext } from "react";
 import { RiDeleteBinLine } from "@remixicon/react";
 import { RiEdit2Line } from "@remixicon/react";
@@ -6,6 +7,7 @@ import { RiStarLine } from "@remixicon/react";
 import { RiStarFill } from "@remixicon/react";
 import { RiInboxArchiveLine } from "@remixicon/react";
 import { RiInboxUnarchiveLine } from "@remixicon/react";
+import { RiBardFill } from "@remixicon/react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import Markdown from "react-markdown";
@@ -35,6 +37,10 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { Badge } from "@/components/ui/badge";
+
+const ai = new GoogleGenAI({
+  apiKey: import.meta.env.VITE_GEMINI_API_KEY,
+});
 
 export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
   const {
@@ -70,6 +76,19 @@ export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
 
   const highlightedText =
     beforeMatch + `<span className="bg-amber-200">${match}</span>` + afterMatch;
+
+  async function summarizeNote(noteText) {
+    try {
+      const response = await ai.models.generateContent({
+        model: "gemini-3.1-flash-lite",
+        contents: `Summarize this note in simple language:\n\n${noteText}`,
+      });
+
+      console.log(response.text);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Card className="w-100 max-sm:w-96">
@@ -174,6 +193,9 @@ export function NoteCard({ note, editNote, searchText, filterTag, isArchive }) {
             </AlertDialogContent>
           </AlertDialog>
         )}
+        <Button onClick={() => summarizeNote(noteText)} className="w-15">
+          <RiBardFill />
+        </Button>
       </CardFooter>
     </Card>
   );
